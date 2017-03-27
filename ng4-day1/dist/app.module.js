@@ -12,9 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
-var hello_world_component_1 = require("./hello-world.component");
-var counter_component_1 = require("./counter.component");
-var game_table_component_1 = require("./game-table.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -23,10 +20,7 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         declarations: [
-            app_component_1.AppComponent,
-            hello_world_component_1.HelloWorldComponent,
-            counter_component_1.CounterComponent,
-            game_table_component_1.TableComponent
+            app_component_1.AppComponent
         ],
         bootstrap: [
             app_component_1.AppComponent

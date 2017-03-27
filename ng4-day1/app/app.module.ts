@@ -10,10 +10,7 @@ import {TableComponent} from "./game-table.component";
 
 @NgModule({
     declarations: [//contents
-        AppComponent,
-        HelloWorldComponent,
-        CounterComponent,
-        TableComponent
+        AppComponent
     ],
 
     bootstrap: [//which runs first(?)
