@@ -17,12 +17,20 @@ var utils_1 = require("./utils");
 var GameGridComponent = GameGridComponent_1 = (function () {
     function GameGridComponent() {
         this.status = GameGridComponent_1.READY;
+        this.collectedRings = 0;
         this.currentPos = { x: 0, y: 0 };
         this.gridSize = { x: 5, y: 5 };
         this.grid = [];
+        this.onPrize = new core_1.EventEmitter();
+        this.onCollectedAll = new core_1.EventEmitter();
+        this.onExplode = new core_1.EventEmitter();
+        this.reset();
+    }
+    GameGridComponent.prototype.reset = function () {
         var numOfMines = Math.floor(Math.random() * 5);
         var potentials = utils_1.default.generateRange(1, this.gridSize.x * this.gridSize.y - 1);
         var specialIdxs = utils_1.default.generateRandomNumbers(potentials, GameGridComponent_1.NUM_OF_BOMBS + GameGridComponent_1.NUM_OF_RINGS); // reserve the last 3 for the rings
+        this.grid = [];
         for (var y = 0; y < this.gridSize.y; y++) {
             this.grid.push([]);
             for (var x = 0; x < this.gridSize.x; x++) {
@@ -34,7 +42,10 @@ var GameGridComponent = GameGridComponent_1 = (function () {
             var icon = i < specialIdxs.length - GameGridComponent_1.NUM_OF_RINGS ? GameGridComponent_1.BOMB : GameGridComponent_1.RING;
             this.grid[gridPos.y][gridPos.x] = icon;
         }
-    }
+        this.currentPos = { x: 0, y: 0 };
+        this.collectedRings = 0;
+        this.status = GameGridComponent_1.READY;
+    };
     GameGridComponent.prototype.isCurPos = function (x, y) {
         return this.currentPos.x === x &&
             this.currentPos.y === y;
@@ -42,7 +53,7 @@ var GameGridComponent = GameGridComponent_1 = (function () {
     GameGridComponent.prototype.getImage = function (x, y) {
         var result = "";
         if (x === this.currentPos.x && y === this.currentPos.y) {
-            result = this.status === GameGridComponent_1.READY ? "url(assets/sonic.png)" : "url(assets/sonic-glow.png)";
+            result = (this.status === GameGridComponent_1.READY || this.status === GameGridComponent_1.PLAYING) ? "url(assets/sonic.png)" : "url(assets/sonic-glow.png)";
         }
         else {
             switch (this.grid[y][x]) {
@@ -50,7 +61,7 @@ var GameGridComponent = GameGridComponent_1 = (function () {
                     result = "";
                     break;
                 case GameGridComponent_1.BOMB:
-                    result = "url(assets/bomb.png)";
+                    result = (this.status !== GameGridComponent_1.PLAYING) ? "url(assets/bomb.png)" : "";
                     break;
                 case GameGridComponent_1.RING:
                     result = "url(assets/ring.png)";
@@ -63,9 +74,10 @@ var GameGridComponent = GameGridComponent_1 = (function () {
         return result;
     };
     GameGridComponent.prototype.move = function (dir) {
-        if (this.status !== GameGridComponent_1.READY) {
+        if (this.status !== GameGridComponent_1.PLAYING && this.status !== GameGridComponent_1.READY) {
             return;
         }
+        this.status = GameGridComponent_1.PLAYING;
         var nextX = this.currentPos.x;
         var nextY = this.currentPos.y;
         switch (dir) {
@@ -88,7 +100,7 @@ var GameGridComponent = GameGridComponent_1 = (function () {
         if (nextY >= 0 && nextY < this.gridSize.y) {
             this.currentPos.y = nextY;
         }
-        this.checkForMine();
+        this.checkForBomb();
         if (this.status !== GameGridComponent_1.LOSE) {
             this.checkForPrize();
         }
@@ -96,14 +108,21 @@ var GameGridComponent = GameGridComponent_1 = (function () {
     GameGridComponent.prototype.checkForPrize = function () {
         if (this.grid[this.currentPos.y][this.currentPos.x] === GameGridComponent_1.RING) {
             this.grid[this.currentPos.y][this.currentPos.x] = GameGridComponent_1.EMPTY;
+            this.collectedRings++;
+            this.onPrize.emit(this.collectedRings);
+            if (this.collectedRings === GameGridComponent_1.NUM_OF_RINGS) {
+                this.status = GameGridComponent_1.WIN;
+                this.onCollectedAll.emit(this.status);
+            }
         }
     };
-    GameGridComponent.prototype.checkForMine = function () {
+    GameGridComponent.prototype.checkForBomb = function () {
         if (this.grid[this.currentPos.y][this.currentPos.x] === GameGridComponent_1.BOMB) {
             this.grid[this.currentPos.y][this.currentPos.x] = GameGridComponent_1.BOOM;
             this.currentPos.x = -1;
             this.currentPos.y = -1;
             this.status = GameGridComponent_1.LOSE;
+            this.onExplode.emit();
         }
     };
     return GameGridComponent;
@@ -113,6 +132,7 @@ GameGridComponent.BOMB = 1;
 GameGridComponent.RING = 2;
 GameGridComponent.BOOM = 3;
 GameGridComponent.READY = "ready";
+GameGridComponent.PLAYING = "playing";
 GameGridComponent.WIN = "win";
 GameGridComponent.LOSE = "lose";
 GameGridComponent.NUM_OF_BOMBS = 5;
@@ -123,10 +143,22 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], GameGridComponent.prototype, "move", null);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], GameGridComponent.prototype, "onPrize", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], GameGridComponent.prototype, "onCollectedAll", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], GameGridComponent.prototype, "onExplode", void 0);
 GameGridComponent = GameGridComponent_1 = __decorate([
     core_1.Component({
         selector: 'game-grid',
-        styles: ["\n      .game-grid{\n          width: 350px;\n          height: 300px;\n          float: right;\n      }\n      .game-grid td{\n        width: 64px;\n        height: 64px;\n        border: black 2px solid;\n        background-repeat: no-repeat;\n          background-position-x: 50%;\n          background-position-y: 50%;\n    } \n  "],
+        styles: ["\n      .game-grid{\n        width: 350px;\n        float: left;\n        margin-left: 140px;\n      }\n      .game-grid td{\n        width: 64px;\n        height: 64px;\n        border: black 2px solid;  \n        background-color: green;\n        background-repeat: no-repeat;  \n        background-position-x: 50%;\n        background-position-y: 50%;\n    } \n  "],
         template: "\n<div class=\"game-grid\">\n  <table>\n      <tr *ngFor=\"let y of grid;index as i\">\n          <td *ngFor=\"let x of grid[i];index as j\" [style.background-image]=\"getImage(j, i)\"></td>\n      </tr>\n  </table>\n</div>\n"
     }),
     __metadata("design:paramtypes", [])

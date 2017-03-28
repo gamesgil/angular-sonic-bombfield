@@ -13,9 +13,13 @@ var core_1 = require("@angular/core");
 var GameControllerComponent = (function () {
     function GameControllerComponent() {
         this.onMove = new core_1.EventEmitter();
+        this.onNewGame = new core_1.EventEmitter();
     }
     GameControllerComponent.prototype.onClick = function (dir) {
         this.onMove.emit(dir);
+    };
+    GameControllerComponent.prototype.onClickNewGame = function () {
+        this.onNewGame.emit();
     };
     GameControllerComponent.prototype.keyboardInput = function (e) {
         switch (e.keyCode) {
@@ -40,6 +44,10 @@ __decorate([
     __metadata("design:type", core_1.EventEmitter)
 ], GameControllerComponent.prototype, "onMove", void 0);
 __decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], GameControllerComponent.prototype, "onNewGame", void 0);
+__decorate([
     core_1.HostListener("window:keyup", ["$event"]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
@@ -48,8 +56,8 @@ __decorate([
 GameControllerComponent = __decorate([
     core_1.Component({
         selector: "game-controller",
-        styles: ["\n        .game-controller{\n            clear: both;\n            width: 150px;\n            height: 100px;\n            float: left;\n        }\n        \n        .game-controller button{\n            width: 50px;\n            height: 20px;\n            position: relative;\n        }\n\n        .game-controller button:nth-child(1){\n            background: red;\n        }\n\n        .game-controller button:nth-child(2){\n            background: green;\n            float: left;\n            top: 50px;\n        }\n\n        .game-controller button:nth-child(3){\n            background: blue;\n            float: right;\n            top: 50px;\n        }\n\n        .game-controller button:nth-child(4){\n            background: yellow;\n            top: 100px;\n            left: 50px;\n        }\n    "],
-        template: "\n        <div class=\"game-controller\">\n            <button (click)=\"onClick('up')\">up</button>\n            <button (click)=\"onClick('left')\">left</button>\n            <button (click)=\"onClick('right')\">right</button>\n            <button (click)=\"onClick('down')\">down</button>\n        </div>\n    "
+        styles: ["\n        .game_controller{\n            clear: both;\n            width: 600px;\n            height: 118px;\n            float: left;\n            background-image: url(assets/gamepad.png);\n            background-repeat: no-repeat;\n            margin-left: 200px;\n        }\n        \n        .gamepad_btn {\n            position: relative;\n            width: 30px;\n            height: 30px;\n            background-color: yellow;\n            border: 1px solid black;\n            cursor: pointer;\n            opacity: 0;\n        }\n\n        .gamepad_btn:nth-child(1){\n            left: 43px;\n            top: 10px;\n        }\n\n        .gamepad_btn:nth-child(2){\n            float: left;\n            top: 10px;\n            left: 14px;\n        }\n\n        .gamepad_btn:nth-child(3){\n            float: left;\n            top: 10px;\n            left: 37px;\n        }\n\n        .gamepad_btn:nth-child(4){\n            float: left;\n            top: 40px;\n            left: -21px;\n        }\n\n        .gamepad_btn:nth-child(5){\n            float: left;\n            top: -15px;\n            left: 29px;\n        }\n\n        .gamepad_btn:nth-child(6){\n            float: left;\n            top: -15px;\n            left: 56px;\n        }\n    "],
+        template: "\n        <div class=\"game_controller\">\n            <div class=\"gamepad_btn\" (click)=\"onClick('up')\">up</div>\n            <div class=\"gamepad_btn\" (click)=\"onClick('left')\">left</div>\n            <div class=\"gamepad_btn\" (click)=\"onClick('right')\">right</div>\n            <div class=\"gamepad_btn\" (click)=\"onClick('down')\">down</div>\n            <div class=\"gamepad_btn\" (click)=\"onClickNewGame()\">new game</div>\n            <div class=\"gamepad_btn\" (click)=\"onClickNewGame()\">new game</div>\n        </div>\n    "
     })
 ], GameControllerComponent);
 exports.GameControllerComponent = GameControllerComponent;

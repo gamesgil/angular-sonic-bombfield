@@ -3,55 +3,82 @@ import {Component, EventEmitter, Input, Output, HostListener} from "@angular/cor
 @Component({
     selector: "game-controller",
     styles: [`
-        .game-controller{
+        .game_controller{
             clear: both;
-            width: 150px;
-            height: 100px;
+            width: 600px;
+            height: 118px;
             float: left;
+            background-image: url(assets/gamepad.png);
+            background-repeat: no-repeat;
+            margin-left: 200px;
         }
         
-        .game-controller button{
-            width: 50px;
-            height: 20px;
+        .gamepad_btn {
             position: relative;
+            width: 30px;
+            height: 30px;
+            background-color: yellow;
+            border: 1px solid black;
+            cursor: pointer;
+            opacity: 0;
         }
 
-        .game-controller button:nth-child(1){
-            background: red;
+        .gamepad_btn:nth-child(1){
+            left: 43px;
+            top: 10px;
         }
 
-        .game-controller button:nth-child(2){
-            background: green;
+        .gamepad_btn:nth-child(2){
             float: left;
-            top: 50px;
+            top: 10px;
+            left: 14px;
         }
 
-        .game-controller button:nth-child(3){
-            background: blue;
-            float: right;
-            top: 50px;
+        .gamepad_btn:nth-child(3){
+            float: left;
+            top: 10px;
+            left: 37px;
         }
 
-        .game-controller button:nth-child(4){
-            background: yellow;
-            top: 100px;
-            left: 50px;
+        .gamepad_btn:nth-child(4){
+            float: left;
+            top: 40px;
+            left: -21px;
+        }
+
+        .gamepad_btn:nth-child(5){
+            float: left;
+            top: -15px;
+            left: 29px;
+        }
+
+        .gamepad_btn:nth-child(6){
+            float: left;
+            top: -15px;
+            left: 56px;
         }
     `],
     template: `
-        <div class="game-controller">
-            <button (click)="onClick('up')">up</button>
-            <button (click)="onClick('left')">left</button>
-            <button (click)="onClick('right')">right</button>
-            <button (click)="onClick('down')">down</button>
+        <div class="game_controller">
+            <div class="gamepad_btn" (click)="onClick('up')">up</div>
+            <div class="gamepad_btn" (click)="onClick('left')">left</div>
+            <div class="gamepad_btn" (click)="onClick('right')">right</div>
+            <div class="gamepad_btn" (click)="onClick('down')">down</div>
+            <div class="gamepad_btn" (click)="onClickNewGame()">new game</div>
+            <div class="gamepad_btn" (click)="onClickNewGame()">new game</div>
         </div>
     `
 })
 export class GameControllerComponent{
-    @Output() onMove: EventEmitter<any> = new EventEmitter()
+    @Output() onMove: EventEmitter<any> = new EventEmitter();
+    @Output() onNewGame: EventEmitter<any> = new EventEmitter();
 
     onClick(dir:string) {
         this.onMove.emit(dir)
+    }
+
+    onClickNewGame() {
+        this.onNewGame.emit();
     }
 
     @HostListener("window:keyup", ["$event"])
