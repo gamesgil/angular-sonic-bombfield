@@ -23,6 +23,9 @@ var GameControllerComponent = (function () {
     };
     GameControllerComponent.prototype.keyboardInput = function (e) {
         switch (e.keyCode) {
+            case 32:
+                this.onNewGame.emit();
+                break;
             case 37:
                 this.onClick("left");
                 break;

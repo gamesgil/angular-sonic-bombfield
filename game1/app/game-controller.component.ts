@@ -84,6 +84,10 @@ export class GameControllerComponent{
     @HostListener("window:keyup", ["$event"])
     keyboardInput(e:KeyboardEvent) {
         switch (e.keyCode) {
+            case 32: // space
+                this.onNewGame.emit();
+                break;
+
             case 37: // left
                 this.onClick("left");
                 break;
