@@ -36,6 +36,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="game-gui.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/game-gui.component.ts">
           <provider selected="true" editor-type-id="text-editor">
@@ -51,7 +61,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game-controller.component.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game-controller.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/game-controller.component.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="480">
@@ -67,6 +77,16 @@
                 <marker date="1490721323926" expanded="true" signature="1268:1352" ph="{...}" />
                 <marker date="1490721323926" expanded="true" signature="1413:1880" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -152,17 +172,17 @@
         <option value="$PROJECT_DIR$/app/containers/index.ts" />
         <option value="$PROJECT_DIR$/app/index.ts" />
         <option value="$PROJECT_DIR$/app/game-gui.ts" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app/game-joystick.ts" />
         <option value="$PROJECT_DIR$/app/app.module.ts" />
         <option value="$PROJECT_DIR$/app/game-controller.ts" />
         <option value="$PROJECT_DIR$/app/utils.ts" />
         <option value="$PROJECT_DIR$/app/game-grid.component.ts" />
         <option value="$PROJECT_DIR$/app/app.component.ts" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/styles.css" />
         <option value="$PROJECT_DIR$/app/game-gui.component.ts" />
         <option value="$PROJECT_DIR$/app/game-controller.component.ts" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -359,12 +379,12 @@
       <workItem from="1490608508602" duration="25979000" />
       <workItem from="1490696779445" duration="8177000" />
       <workItem from="1490707038693" duration="437000" />
-      <workItem from="1490720151195" duration="1174000" />
+      <workItem from="1490720151195" duration="1298000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50297000" />
+    <option name="totallyTimeSpent" value="50421000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -535,14 +555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="22" column="3" lean-forward="false" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/app.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -605,14 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="18" lean-forward="true" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/game-grid.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
@@ -659,6 +663,22 @@
             <marker date="1490721323926" expanded="true" signature="1268:1352" ph="{...}" />
             <marker date="1490721323926" expanded="true" signature="1413:1880" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
